@@ -5,7 +5,7 @@ import rateLimit from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
 import hpp from "hpp";
 import morgan from "morgan";
-
+import authRoutes from "./modules/auth/auth.route.ts";
 const app = express();
 
 app.use(helmet());
@@ -35,6 +35,8 @@ if (process.env.NODE_ENV === "development") {
 app.get("/health", (req, res) => {
   res.send("OK");
 });
+
+app.use("/api/v1/auth", authRoutes);
 
 app.use((err: any, req: any, res: any, next: any) => {
   res.status(500).json({ message: err.message });
