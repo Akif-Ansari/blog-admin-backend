@@ -1,10 +1,12 @@
-import { Request, Response } from "express";
-import * as authService from "./auth.service";
+import { type Request, type Response } from "express";
+import * as authService from "./auth.service.ts";
 import { sendResponse } from "../../utils/send-response.ts";
 
 export const register = async (req: Request, res: Response) => {
   try {
+    console.log("[DEBUG] Register payload:", req.body);
     const user = await authService.registerUser(req.body);
+
     sendResponse(res, {
       statusCode: 201,
       success: true,

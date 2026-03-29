@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { User } from "./auth.model";
-import { IUser, ILogin } from "./auth.interface";
+import { User } from "./auth.model.ts";
+import { type IUser, type ILogin } from "./auth.interface.ts";
 
 export const registerUser = async (payload: IUser) => {
   const existingUser = await User.findOne({ email: payload.email });
