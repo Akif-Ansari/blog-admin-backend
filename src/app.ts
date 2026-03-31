@@ -10,12 +10,12 @@ const app = express();
 
 const allowedOrigins = ["http://localhost:8080"];
 app.use(helmet());
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-  }),
-);
+// app.use(
+//   cors({
+//     origin: allowedOrigins,
+//     credentials: true,
+//   }),
+// );
 app.use(
   "/api",
   rateLimit({
@@ -25,6 +25,7 @@ app.use(
 );
 
 app.use(express.json({ limit: "10kb" }));
+app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
   const sanitize = (obj: any) => {
     if (obj instanceof Object) {
